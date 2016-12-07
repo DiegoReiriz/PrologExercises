@@ -21,7 +21,7 @@ padre(X,Y):- progenitor(X,Y), hombre(X).
 madre(X,Y):- progenitor(X,Y), mujer(X).
 
 hijo(X,Y) :- progenitor(Y,X).
-abuelo(X,Y) :- progenitor(X,Z),progenitor(Z,Y).
+abuelo(X,Y) :- padre(X,Z),progenitor(Z,Y).
 hermano(X,Y) :- padre(Z,X),padre(Z,Y),madre(W,X),madre(W,Y), X \= Y.
 tio(X,Y) :- progenitor(Z,Y), hermano(X,Z).
 descendiente(X,Y) :- progenitor(Y,Z),descendiente(X,Z).

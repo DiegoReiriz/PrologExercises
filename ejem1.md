@@ -159,3 +159,52 @@ X = maria.
 X = teresa ;
 false.
 ```
+
+## My NOTES
+
+  abuelo(x,Y)
+      | x1 / javier
+      | Y1 / teresa
+  padre(javier,Z), progenitor(Z,teresa)
+      |
+  progenitor(javier,Z),hombre(javier), progenitor(Z,teresa)
+      |
+  progenitor(javier,Z),hombre(javier), progenitor(Z,teresa)
+      |                                   |
+      |z1                                 | z2
+      |                                   |
+  progenitor(javier,pedro) n/         progenitor(javier,teresa) n/
+  hombre(javier)  n/                  hombre(javier)  n/
+  progenitor(pedro,teresa) X          progenitor(teresa,teresa) X
+-----------------------------------------------------------------------------------------------------------
+  abuelo(x,Y)
+      | x1 / javier
+      | Y1 / alicia
+  padre(javier,Z), progenitor(Z,alicia)
+      |
+  progenitor(javier,Z),hombre(javier), progenitor(Z,alicia)
+      |
+  progenitor(javier,Z),hombre(javier), progenitor(Z,alicia)
+      |                                   |
+      |z1=pedro                           | z2 = alica
+      |                                   |
+  progenitor(javier,pedro) n/         progenitor(javier,teresa) n/
+  hombre(javier)  n/                  hombre(jorge)  n/
+  progenitor(pedro,alicia) X          progenitor(teresa,alicia) n/
+--------------------------------------------------------------------------------------------------------------
+  abuelo(javier,Y)
+      | Y1 /
+  padre(javier,Z), progenitor(Z,Y)
+      |
+  progenitor(javier,Z),hombre(javier), progenitor(Z,Y)
+      |
+      |                                                         |
+      |z1=pedro                                                 | z2 = alica
+      |                                                         |
+  progenitor(javier,pedro) n/                                   progenitor(javier,teresa) n/
+  hombre(javier)  n/                                            hombre(jorge)  n/
+  progenitor(pedro,Y) X                                         progenitor(teresa,Y) n/
+      |  y=Alfonso                | y=juan                       | y=Alicia
+  progenitor(javier,pedro) n/   progenitor(javier,pedro) n/     progenitor(javier,teresa) n/
+  hombre(javier)  n/            hombre(javier)  n/              hombre(jorge)  n/
+  progenitor(pedro,Alfonso) X   progenitor(pedro,juan) X        progenitor(teresa,alicia) n/
