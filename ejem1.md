@@ -50,13 +50,6 @@ X = pablo.
 ```Prolog
 ?- pareja(X,juan).
 false.
-hijo(X,Y) :- progenitor(Y,X).
-abuelo(X,Y) :- progenitor(X,Z),progenitor(Z,Y).
-hermano(X,Y) :- padre(Z,X),padre(Z,Y),madre(W,X),madre(W,Y), X \= Y.
-tio(X,Y) :- progenitor(Z,Y), hermano(X,Z).
-descendiente(X,Y) :- progenitor(Y,Z),descendiente(X,Z).
-descendiente(X,Y) :- progenitor(Y,X).
-
 ```
 
 ### ?-pareja(luis,Y).
@@ -121,7 +114,7 @@ false.
 ### ?- hijo(javier,X).
 
 ```Prolog
-abuelo(javier,teresa).
+?- hijo(javier,X).
 false.
 ```
 

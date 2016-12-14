@@ -42,6 +42,54 @@ Y = a ;
 
 ### d) Implemente una regla que permita consultar si el autómata acepta una cadena de longitud determinada.
 
+```prolog
+  cadenaLongitudExacta(C,L) :- length(C,L) ,aceptaCadena(C).
+```
 
 
 ### e) Implemente una regla que permita consultar las cadenas de longitud menor o igual que una dada que acepta el autómata. Nota: chequee el predicado predefinido between
+
+```prolog
+  cadenaLongitudMenorExacta(C,L) :- between(0,L,X), length(C,X) ,aceptaCadena(C).
+```
+
+
+# 2. Implementación de un problema de búsqueda en un espacio de estados
+
+Un mono se encuentra en la puerta de una habitación. En el centro de la habitación hay unos
+plátanos colgados del techo. El mono está hambriento y desea coger el plátano, pero no lo alcanza
+desde el suelo.
+
+En la ventana de la habitación hay una silla que el mono puede usar. El problema puede resolverse
+mediante una búsqueda en un espacio de estados.
+
+## 1) ¿Qué situaciones (o estados) podríamos identificar? Una posible solución es primero considerar los tres elementos que definen la situación: el mono, la silla y el plátano. los dos primeros elementos se pueden encontrar en las tres posibles localizaciones de interés para el problema: en la puerta, en el centro de la habitación o al lado de la ventana. El plátano puede estar colgado del techo o no (en cuyo caso, lo tendrá el mono). Además, el mono puede encontrarse directamente sobre el suelo o encima de una silla. ¿Cómo representarías un estado o situación del problema? Define la base de hechos inicial con un hecho que defina el estado final.
+
+estado:
+
+- posicion mono
+- altura mono
+- posicion caja
+- posiicion plátano
+
+inicio(estado(puerta,abajo,ventana,arriba)).
+fin(estado(centro,arriba,centro,arriba)).
+
+## 2) Implementar las reglas necesarias para las acciones posibles. Es decir, una regla por cada operador a aplicar.
+
+```prolog
+transicion(subirSilla(X),estado(X,abajo,X,arriba),estado(X,arriba,X,arriba)).
+transicion(moverSilla(Y,centro),estado(Y,abajo,Y,arriba),estado(centro,abajo,centro,arriba)).
+transicion(moverMono(X,Y),estado(X,abajo,Z,arriba),estado(Y,abajo,Z,arriba)).
+```
+
+## 3) Implementar, mediante recursión, las reglas necesarias para obtener la solución aplicando los operadores definidos en el apartado anterior sobre un estado inicial.
+
+```prolog
+resolver(STATE, [OP]) :-  fin(FINAL), transicion(OP, STATE, FINAL), !.
+resolver(STATE, [OP|OP2]) :- transicion(OP, STATE, STATE2), resolver(STATE2, OP2), !.
+```
+
+## 4) Cambie el orden de los operadores y ejecute de nuevo el programa. Compruebe que sigue funcionando bien.
+
+Deja de funcionar porque entra en bucle infinitos
